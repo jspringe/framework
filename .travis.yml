@@ -11,20 +11,20 @@ matrix:
     - os: linux
       dist: xenial
       language: php
-      php: 7.2
+      php: '7.2'
       services:
         - memcached
         - redis-server
         - mysql
     - os: linux
-        dist: xenial
-        language: php
-        php: '7.2'
-        env: SETUP=lowest
-        services:
-          - memcached
-          - redis-server
-          - mysql
+      dist: xenial
+      language: php
+      php: '7.2'
+      env: SETUP=lowest
+      services:
+        - memcached
+        - redis-server
+        - mysql
 
 cache:
   directories:
