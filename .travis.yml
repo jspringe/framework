@@ -83,7 +83,8 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
   # Windows: Install MySQL and create database
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install mysql; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'CREATE DATABASE forge;' fi
+  - mysql || true
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -p -e 'CREATE DATABASE forge;' fi
   # Windows: Install Redis and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install redis-64; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/chocolatey/lib/redis-64:$PATH; fi
