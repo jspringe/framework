@@ -56,8 +56,8 @@ cache:
 
 before_install:
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then phpenv config-rm xdebug.ini || true; fi
-  - if [[ $TRAVIS_OS_NAME != 'windows' ]]; echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
-  - if [[ $TRAVIS_OS_NAME != 'windows' ]]; printf "\n" | pecl install -f redis; fi
+  - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
+  - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then printf "\n" | pecl install -f redis; fi
   - travis_retry composer self-update
   - mysql -e 'CREATE DATABASE forge;'
 
