@@ -83,6 +83,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
   # Windows: Install MySQL and create database
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install mysql; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
   - mysql || true
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root --skip-password -e 'CREATE DATABASE forge;' fi
   # Windows: Install Redis and modify PATH
