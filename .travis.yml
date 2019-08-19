@@ -58,6 +58,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then phpenv config-rm xdebug.ini || true; fi
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then printf "\n" | pecl install -f redis; fi
+  - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then mysql -e 'CREATE DATABASE forge;' fi
 
   # Windows: Install PHP and setup PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install php --version $PHP_VERSION -y; fi
@@ -80,15 +81,14 @@ before_install:
   # Windows: Install Composer and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install composer -i; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
-  # Windows: Install MySQL and modify PATH
+  # Windows: Install MySQL and create database
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install mysql; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/current/bin:$PATH; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'CREATE DATABASE forge;' fi
   # Windows: Install Redis and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install redis-64; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/chocolatey/lib/redis-64:$PATH; fi
 
   - travis_retry composer self-update
-  - mysql -e 'CREATE DATABASE forge;'
 
 install:
   - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
