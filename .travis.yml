@@ -57,7 +57,6 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - 7z
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then phpenv config-rm xdebug.ini || true; fi
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then printf "\n" | pecl install -f redis; fi
@@ -66,6 +65,12 @@ before_install:
   # Windows: Install PHP and setup PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install php --version $PHP_VERSION -y; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/$PHP_DIR:$PATH; fi
+
+  # Windows: Install Redis extension
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then travis_retry wget $REDIS_EXT -O /c/tools/redis_ext.zip -q; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then 7z e "c:\tools\redis_ext.zip" -o "c:\tools\php\$PHP_DIR\ext" php_redis.dll; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_redis.dll" >> /c/tools/$PHP_DIR/php.ini; fi
+
   # Windows: Modify configuration
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo 'extension_dir="ext"' >> /c/tools/$PHP_DIR/php.ini; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_openssl.dll" >> /c/tools/$PHP_DIR/php.ini; fi
@@ -93,10 +98,6 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/chocolatey/lib/redis-64:$PATH; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-install; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-start; fi
-  # Windows: Install Redis extension
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then travis_retry wget $REDIS_EXT -O /c/tools/redis_ext.zip -q; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then 7z e c/tools/redis_ext.zip -oc/tools/php/$PHP_DIR/ext php_redis.dll; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_redis.dll" >> /c/tools/$PHP_DIR/php.ini; fi
 
   - travis_retry composer self-update
 #  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then composer require predis/predis; fi
