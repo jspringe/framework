@@ -89,7 +89,8 @@ before_install:
   # Windows: Install Redis and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install redis-64; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/chocolatey/lib/redis-64:$PATH; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-install; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-start; fi
 
   - travis_retry composer self-update
 
