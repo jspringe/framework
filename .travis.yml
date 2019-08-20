@@ -83,9 +83,8 @@ before_install:
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install mysql -r; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root --skip-password -e "UNINSTALL PLUGIN validate_password;"; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root --skip-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '';"; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -p '' -e 'CREATE DATABASE forge;'; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
   # Windows: Install Redis and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install redis-64; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/chocolatey/lib/redis-64:$PATH; fi
