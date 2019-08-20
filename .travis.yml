@@ -77,24 +77,27 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_ftp.dll" >> /c/tools/$PHP_DIR/php.ini; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "memory_limit=256M" >> /c/tools/$PHP_DIR/php.ini; fi
 
-  # Windows: Install Redis extension
+  # Windows: Download Redis Extension, extract Redis extension, and update configuration
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then travis_retry wget $REDIS_EXT -O /c/tools/redis_ext.zip -q; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then unzip /c/tools/redis_ext.zip -d /c/tools/$PHP_DIR/ext; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_redis.dll" >> /c/tools/$PHP_DIR/php.ini; fi
 
   # Windows: Add Curl (if needed), download CA Bundle and update configuration
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_curl.dll" >> /c/tools/$PHP_DIR/php.ini; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then travis_retry wget https://curl.haxx.se/ca/cacert.pem -O /c/tools/cacert.pem -q; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "curl.cainfo=C:\tools\cacert.pem" >> /c/tools/$PHP_DIR/php.ini; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_curl.dll" >> /c/tools/$PHP_DIR/php.ini; fi
 
   # Windows: Install Composer and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install composer -i; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
+
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
+  # Loud 'choco install MySQL' refuses to be quiet.
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install mysql --version 5.7.18; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
+
   # Windows: Install Redis and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install redis-64; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/chocolatey/lib/redis-64:$PATH; fi
@@ -102,7 +105,6 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-start; fi
 
   - travis_retry composer self-update
-#  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then composer require predis/predis; fi
 
 install:
   - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
