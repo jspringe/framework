@@ -45,8 +45,27 @@ class FilesystemTest extends TestCase
     public function testReplaceStoresFiles()
     {
         $tempFile = "{$this->tempDir}/file.txt";
+
+        $filesystem = new Filesystem;
+
+        // Test replacing non-existent file.
+        $filesystem->replace($tempFile, 'Hello World');
+        $this->assertStringEqualsFile($tempFile, 'Hello World');
+
+        // Test replacing existing file.
+        $filesystem->replace($tempFile, 'Something Else');
+        $this->assertStringEqualsFile($tempFile, 'Something Else');
+    }
+
+    public function testReplaceStoresSymlinkedFiles()
+    {
+        $tempFile = "{$this->tempDir}/file.txt";
         $symlinkDir = "{$this->tempDir}/symlink_dir";
         $symlink = "{$symlinkDir}/symlink.txt";
+
+        if (substr(strtolower(PHP_OS), 0, 3) === 'win' && PHP_VERSION_ID <= 70308) {
+            $this->markTestSkipped('This Windows version of PHP does not properly support symlink.');
+        }
 
         mkdir($symlinkDir);
         symlink($tempFile, $symlink);
