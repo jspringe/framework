@@ -57,6 +57,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
+  - 7z
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then phpenv config-rm xdebug.ini || true; fi
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then printf "\n" | pecl install -f redis; fi
@@ -98,7 +99,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_redis.dll" >> /c/tools/$PHP_DIR/php.ini; fi
 
   - travis_retry composer self-update
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then composer require predis/predis; fi
+#  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then composer require predis/predis; fi
 
 install:
   - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
