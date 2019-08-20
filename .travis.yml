@@ -68,7 +68,7 @@ before_install:
 
   # Windows: Install Redis extension
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then travis_retry wget $REDIS_EXT -O /c/tools/redis_ext.zip -q; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then 7z e "c:\tools\redis_ext.zip" -o "c:\tools\php\$PHP_DIR\ext" php_redis.dll; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then 7z e "c:\tools\redis_ext.zip" -o"c:\tools\php\$PHP_DIR\ext" php_redis.dll; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_redis.dll" >> /c/tools/$PHP_DIR/php.ini; fi
 
   # Windows: Modify configuration
@@ -89,7 +89,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install composer -i; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install mysql --version 5.7.18; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install mysql --version 5.7.18 >/dev/null 2>&1; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
