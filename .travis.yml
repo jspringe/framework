@@ -68,8 +68,8 @@ before_install:
 
   # Windows: Install Redis extension
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then travis_retry wget $REDIS_EXT -O /c/tools/redis_ext.zip -q; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then 7z e "c:\tools\redis_ext.zip" -o"c:\tools\php\"$PHP_DIR"\ext"; fi
-  - dir "c:\tools\php\"$PHP_DIR"\ext"
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then 7z e "c:\tools\redis_ext.zip" -o"c:\tools\php\\"$PHP_DIR"\\ext"; fi
+  - dir "c:\tools\php\\"$PHP_DIR"\\ext"
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then echo "extension=php_redis.dll" >> /c/tools/$PHP_DIR/php.ini; fi
 
   # Windows: Modify configuration
