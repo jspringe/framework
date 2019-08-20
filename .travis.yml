@@ -93,6 +93,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-start; fi
 
   - travis_retry composer self-update
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then composer require predis/predis; fi
 
 install:
   - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
