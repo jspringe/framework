@@ -61,7 +61,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then printf "\n" | pecl install -f redis; fi
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then mysql -e 'CREATE DATABASE forge;'; fi
-
+  - unzip
   # Windows: Install PHP and setup PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then choco install php --version $PHP_VERSION -y; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/$PHP_DIR:$PATH; fi
