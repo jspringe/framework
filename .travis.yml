@@ -85,7 +85,7 @@ before_install:
 #  - if [ $TRAVIS_OS_NAME = 'windows' ]; then echo "curl.cainfo=C:\tools\cacert.pem" >> /c/tools/$PHP_DIR/php.ini; fi
 
   # Windows: Install Composer and modify PATH
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/$PHP_DIR/php.ini" ]; then if [ ! -f "/c/ProgramData/ComposerSetup/bin/composer.bat" ]; then choco install composer -i;  fi; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/ProgramData/ComposerSetup/bin/composer.bat" ]; then choco install composer -i;  fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
 #  - if [ $TRAVIS_OS_NAME = 'windows' ]; then choco install composer -i; fi
 #  - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
