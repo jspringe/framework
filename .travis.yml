@@ -5,40 +5,40 @@ env:
 matrix:
   fast_finish: true
   include:
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.2'
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.2'
-#      env: SETUP=lowest
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.3'
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.3'
-#      env: SETUP=lowest
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.2'
+      services:
+        - memcached
+        - redis-server
+        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.2'
+      env: SETUP=lowest
+      services:
+        - memcached
+        - redis-server
+        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.3'
+      services:
+        - memcached
+        - redis-server
+        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.3'
+      env: SETUP=lowest
+      services:
+        - memcached
+        - redis-server
+        - mysql
     - os: windows
       language: sh
       env:
