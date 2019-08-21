@@ -76,7 +76,7 @@ before_install:
 
   # Windows: Download Redis Extension, extract Redis extension, and update configuration
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then travis_retry wget $REDIS_EXT -O /c/tools/redis_ext.zip -q; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then unzip /c/tools/redis_ext.zip -d /c/tools/$PHP_DIR/ext; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then unzip /c/tools/redis_ext.zip -o -d /c/tools/$PHP_DIR/ext; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then echo "extension=php_redis.dll" >> /c/tools/$PHP_DIR/php.ini; fi
 
   # Windows: Add Curl (if needed), download CA Bundle and update configuration
