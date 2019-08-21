@@ -5,14 +5,14 @@ env:
 matrix:
   fast_finish: true
   include:
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.2'
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.2'
+      services:
+        - memcached
+        - redis-server
+        - mysql
 #    - os: linux
 #      dist: xenial
 #      language: php
@@ -39,22 +39,26 @@ matrix:
 #        - memcached
 #        - redis-server
 #        - mysql
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.2.20
-        - PHP_DIR=php72
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.3.8
-        - PHP_DIR=php73
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.2.20
+#        - PHP_DIR=php72
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.3.8
+#        - PHP_DIR=php73
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
 
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/AppData/Local/Temp/chocolatey
+    - $HOME/AppData/Local/Composer
+    - /c/tools/$PHP_DIR
+    - /c/ProgramData/ComposerSetup/bin
 
 before_install:
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then phpenv config-rm xdebug.ini || true; fi
