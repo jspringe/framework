@@ -142,7 +142,7 @@ before_install:
 
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/bin/mysql.exe" ]; then /c/tools/mysql/current/bin/mysqld.exe --install; fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/bin/mysql.exe" ]; then cmd /c NET START MySQL; fi; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/bin/mysql.exe" ]; then net start mysql; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/current/bin/mysql.exe" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
