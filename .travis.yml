@@ -79,7 +79,7 @@ before_install:
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
 
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/bin/mysql.exe" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/current/bin/mysql.exe" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
 
   # Windows: Install Redis and modify PATH
