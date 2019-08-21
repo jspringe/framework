@@ -1,5 +1,5 @@
 echo "Downloading Redis"
-travis_retry wget $REDIS_EXT -O /c/tools/redis_ext.zip -q
+wget $REDIS_EXT -O /c/tools/redis_ext.zip -q
 unzip -o /c/tools/redis_ext.zip -d /c/tools/$PHP_DIR/ext
 
 echo "Modifying PHP Configuration";
