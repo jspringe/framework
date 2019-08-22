@@ -145,7 +145,7 @@ before_install:
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/bin/mysql.exe" ]; then net start mysql; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/current/bin/mysql.exe" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');";; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install Redis and modify PATH
