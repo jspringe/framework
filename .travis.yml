@@ -5,56 +5,56 @@ env:
 matrix:
   fast_finish: true
   include:
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.2'
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.2'
-#      env: SETUP=lowest
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.3'
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
-#    - os: linux
-#      dist: xenial
-#      language: php
-#      php: '7.3'
-#      env: SETUP=lowest
-#      services:
-#        - memcached
-#        - redis-server
-#        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.2'
+      services:
+        - memcached
+        - redis-server
+        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.2'
+      env: SETUP=lowest
+      services:
+        - memcached
+        - redis-server
+        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.3'
+      services:
+        - memcached
+        - redis-server
+        - mysql
+    - os: linux
+      dist: xenial
+      language: php
+      php: '7.3'
+      env: SETUP=lowest
+      services:
+        - memcached
+        - redis-server
+        - mysql
 
-#    - os: osx
-#      language: php
-#      php: '7.2'
-#    - os: osx
-#      language: php
-#      php: '7.2'
-#      env: SETUP=lowest
-#
-#    - os: osx
-#      language: php
-#      php: '7.3'
-#    - os: osx
-#      language: php
-#      php: '7.3'
-#      env: SETUP=lowest
+    - os: osx
+      language: php
+      php: '7.2'
+    - os: osx
+      language: php
+      php: '7.2'
+      env: SETUP=lowest
+
+    - os: osx
+      language: php
+      php: '7.3'
+    - os: osx
+      language: php
+      php: '7.3'
+      env: SETUP=lowest
 
     - os: windows
       language: sh
@@ -71,54 +71,54 @@ matrix:
           - /c/ProgramData/MySQL/data
           - /c/tools/$PHP_DIR
           - /c/tools/mysql/
-#    - os: windows
-#      language: sh
-#      env:
-#        - PHP_VERSION=7.2.20
-#        - PHP_DIR=php72
-#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
-#        - SETUP=lowest
-#      cache:
-#        directories:
-#          - /c/ProgramData/chocolatey/lib/redis-64
-#          - $HOME/AppData/Local/Temp/chocolatey
-#          - /c/ProgramData/ComposerSetup/bin
-#          - $HOME/AppData/Local/Composer
-#          - /c/ProgramData/MySQL/data
-#          - /c/tools/$PHP_DIR
-#          - /c/tools/mysql/
-#
-#    - os: windows
-#      language: sh
-#      env:
-#        - PHP_VERSION=7.3.8
-#        - PHP_DIR=php73
-#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
-#      cache:
-#        directories:
-#          - /c/ProgramData/chocolatey/lib/redis-64
-#          - $HOME/AppData/Local/Temp/chocolatey
-#          - /c/ProgramData/ComposerSetup/bin
-#          - $HOME/AppData/Local/Composer
-#          - /c/ProgramData/MySQL/data
-#          - /c/tools/$PHP_DIR
-#          - /c/tools/mysql/
-#    - os: windows
-#      language: sh
-#      env:
-#        - PHP_VERSION=7.3.8
-#        - PHP_DIR=php73
-#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
-#        - SETUP=lowest
-#      cache:
-#        directories:
-#          - /c/ProgramData/chocolatey/lib/redis-64
-#          - $HOME/AppData/Local/Temp/chocolatey
-#          - /c/ProgramData/ComposerSetup/bin
-#          - $HOME/AppData/Local/Composer
-#          - /c/ProgramData/MySQL/data
-#          - /c/tools/$PHP_DIR
-#          - /c/tools/mysql/
+    - os: windows
+      language: sh
+      env:
+        - PHP_VERSION=7.2.20
+        - PHP_DIR=php72
+        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
+        - SETUP=lowest
+      cache:
+        directories:
+          - /c/ProgramData/chocolatey/lib/redis-64
+          - $HOME/AppData/Local/Temp/chocolatey
+          - /c/ProgramData/ComposerSetup/bin
+          - $HOME/AppData/Local/Composer
+          - /c/ProgramData/MySQL/data
+          - /c/tools/$PHP_DIR
+          - /c/tools/mysql/
+
+    - os: windows
+      language: sh
+      env:
+        - PHP_VERSION=7.3.8
+        - PHP_DIR=php73
+        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
+      cache:
+        directories:
+          - /c/ProgramData/chocolatey/lib/redis-64
+          - $HOME/AppData/Local/Temp/chocolatey
+          - /c/ProgramData/ComposerSetup/bin
+          - $HOME/AppData/Local/Composer
+          - /c/ProgramData/MySQL/data
+          - /c/tools/$PHP_DIR
+          - /c/tools/mysql/
+    - os: windows
+      language: sh
+      env:
+        - PHP_VERSION=7.3.8
+        - PHP_DIR=php73
+        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
+        - SETUP=lowest
+      cache:
+        directories:
+          - /c/ProgramData/chocolatey/lib/redis-64
+          - $HOME/AppData/Local/Temp/chocolatey
+          - /c/ProgramData/ComposerSetup/bin
+          - $HOME/AppData/Local/Composer
+          - /c/ProgramData/MySQL/data
+          - /c/tools/$PHP_DIR
+          - /c/tools/mysql/
 
 cache:
   directories:
@@ -139,12 +139,10 @@ before_install:
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
 
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then /c/tools/mysql/current/bin/mysqld.exe --install || cat /c/tools/mysql/current/my.ini; fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then sc queryex type=service state=all; fi; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then /c/tools/mysql/current/bin/mysqld.exe --install; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then net start MySQL; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/current/my.ini" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
-#  - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install Redis and modify PATH
@@ -162,5 +160,6 @@ install:
 script: vendor/bin/phpunit
 
 before_cache:
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then redis-server --service-stop; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root -e 'DROP DATABASE forge;'; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then net stop mysql; fi
