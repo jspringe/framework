@@ -71,54 +71,54 @@ matrix:
           - /c/tools/mysql/
           - /c/ProgramData/MySQL/data
           - /c/ProgramData/chocolatey/lib/redis-64
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.2.20
-        - PHP_DIR=php72
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
-        - SETUP=lowest
-      cache:
-        directories:
-          - $HOME/AppData/Local/Temp/chocolatey
-          - $HOME/AppData/Local/Composer
-          - /c/tools/$PHP_DIR
-          - /c/ProgramData/ComposerSetup/bin
-          - /c/tools/mysql/
-          - /c/ProgramData/MySQL/data
-          - /c/ProgramData/chocolatey/lib/redis-64
-
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.3.8
-        - PHP_DIR=php73
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
-      cache:
-        directories:
-          - $HOME/AppData/Local/Temp/chocolatey
-          - $HOME/AppData/Local/Composer
-          - /c/tools/$PHP_DIR
-          - /c/ProgramData/ComposerSetup/bin
-          - /c/tools/mysql/
-          - /c/ProgramData/MySQL/data
-          - /c/ProgramData/chocolatey/lib/redis-64
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.3.8
-        - PHP_DIR=php73
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
-        - SETUP=lowest
-      cache:
-        directories:
-          - $HOME/AppData/Local/Temp/chocolatey
-          - $HOME/AppData/Local/Composer
-          - /c/tools/$PHP_DIR
-          - /c/ProgramData/ComposerSetup/bin
-          - /c/tools/mysql/
-          - /c/ProgramData/MySQL/data
-          - /c/ProgramData/chocolatey/lib/redis-64
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.2.20
+#        - PHP_DIR=php72
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
+#        - SETUP=lowest
+#      cache:
+#        directories:
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - $HOME/AppData/Local/Composer
+#          - /c/tools/$PHP_DIR
+#          - /c/ProgramData/ComposerSetup/bin
+#          - /c/tools/mysql/
+#          - /c/ProgramData/MySQL/data
+#          - /c/ProgramData/chocolatey/lib/redis-64
+#
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.3.8
+#        - PHP_DIR=php73
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
+#      cache:
+#        directories:
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - $HOME/AppData/Local/Composer
+#          - /c/tools/$PHP_DIR
+#          - /c/ProgramData/ComposerSetup/bin
+#          - /c/tools/mysql/
+#          - /c/ProgramData/MySQL/data
+#          - /c/ProgramData/chocolatey/lib/redis-64
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.3.8
+#        - PHP_DIR=php73
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
+#        - SETUP=lowest
+#      cache:
+#        directories:
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - $HOME/AppData/Local/Composer
+#          - /c/tools/$PHP_DIR
+#          - /c/ProgramData/ComposerSetup/bin
+#          - /c/tools/mysql/
+#          - /c/ProgramData/MySQL/data
+#          - /c/ProgramData/chocolatey/lib/redis-64
 
 cache:
   directories:
