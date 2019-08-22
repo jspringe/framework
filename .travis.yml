@@ -52,19 +52,45 @@ matrix:
         directories:
           - $HOME/Library/Caches/Homebrew
           - $HOME/.composer/cache
+    - os: osx
+      osx_image: xcode11
+      language: generic
+      addons:
+        homebrew:
+          brewfile: ./bin/travis/mac_brewfile_72.txt
+      env:
+        PHP_VERSION=7.2
+        SETUP=lowest
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+          - $HOME/.composer/cache
 
-#    - os: osx
-#      language: php
-#      php: '7.2'
-#      env: SETUP=lowest
-#
-#    - os: osx
-#      language: php
-#      php: '7.3'
-#    - os: osx
-#      language: php
-#      php: '7.3'
-#      env: SETUP=lowest
+    - os: osx
+      osx_image: xcode11
+      language: generic
+      addons:
+        homebrew:
+          brewfile: ./bin/travis/mac_brewfile_73.txt
+      env:
+        PHP_VERSION=7.3
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+          - $HOME/.composer/cache
+    - os: osx
+      osx_image: xcode11
+      language: generic
+      addons:
+        homebrew:
+          brewfile: ./bin/travis/mac_brewfile_73.txt
+      env:
+        PHP_VERSION=7.3
+        SETUP=lowest
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+          - $HOME/.composer/cache
 
 #    - os: windows
 #      language: sh
@@ -137,11 +163,11 @@ cache:
 before_install:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo "memory_limit=256M" >> /usr/local/etc/php/$PHP_VERSION/php.ini; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then printf "\n" | pecl install -f memcached; fi
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then printf "\n" | pecl install -f redis; fi
+
+  - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then printf "\n" | pecl install -f redis; fi
 
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then phpenv config-rm xdebug.ini || true; fi
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
-  - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then printf "\n" | pecl install -f redis; fi
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then mysql -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install PHP and setup PATH

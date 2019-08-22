@@ -1,0 +1,7 @@
+brew "libmemcached"
+brew "pkg-config"
+brew "memcached", restart_service: true
+brew "php@7.3", link: true, force: true
+brew "mysql@5.7", restart_service: true, link: true, conflicts_with: ["mysql"]
+brew "redis", restart_service: true
+brew "composer"
