@@ -41,8 +41,9 @@ matrix:
 #        - mysql
 
     - os: osx
+      osx_image: xcode11
       env:
-        PHP_VERSION=7.2.20
+        PHP_VERSION=7.2
       cache:
         directories:
           - $HOME/Library/Caches/Homebrew
