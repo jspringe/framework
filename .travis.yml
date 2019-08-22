@@ -130,7 +130,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew update php@$PHP_VERSION; fi
+  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew upgrade php@$PHP_VERSION; fi
   - if [ $TRAVIS_OS_NAME = 'osx' ]; then php -v; fi
   - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install composer; fi
 
