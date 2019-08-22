@@ -43,6 +43,9 @@ matrix:
     - os: osx
       osx_image: xcode11
       language: generic
+      addons:
+        homebrew:
+          brewfile: ./bin/travis/mac_brewfile.txt
       env:
         PHP_VERSION=7.2
       cache:
@@ -132,12 +135,18 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
+# echo 'export PATH="/usr/local/opt/php@7.2/bin:$PATH"' >> ~/.bash_profile
+#
+#  echo 'export PATH="/usr/local/opt/php@7.2/sbin:$PATH"' >> ~/.bash_profile
 # /usr/local/etc/php/7.2/ - ini file
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew update; fi
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install php@$PHP_VERSION; fi
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew link php@$PHP_VERSION --force; fi
+# /usr/local/Cellar/php@7.2/
+# /usr/local/Cellar/composer/
+#  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew update; fi
+#  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install php@$PHP_VERSION; fi
+#  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew link php@$PHP_VERSION --force; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then php -v; fi
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install composer; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then phpenv ||; fi
+#  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install composer; fi
 
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then phpenv config-rm xdebug.ini || true; fi
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
