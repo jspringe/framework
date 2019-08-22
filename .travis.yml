@@ -5,44 +5,49 @@ env:
 matrix:
   fast_finish: true
   include:
-    - os: linux
-      dist: xenial
-      language: php
-      php: '7.2'
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: linux
-      dist: xenial
-      language: php
-      php: '7.2'
-      env: SETUP=lowest
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: linux
-      dist: xenial
-      language: php
-      php: '7.3'
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: linux
-      dist: xenial
-      language: php
-      php: '7.3'
-      env: SETUP=lowest
-      services:
-        - memcached
-        - redis-server
-        - mysql
-
-#    - os: osx
+#    - os: linux
+#      dist: xenial
 #      language: php
 #      php: '7.2'
+#      services:
+#        - memcached
+#        - redis-server
+#        - mysql
+#    - os: linux
+#      dist: xenial
+#      language: php
+#      php: '7.2'
+#      env: SETUP=lowest
+#      services:
+#        - memcached
+#        - redis-server
+#        - mysql
+#    - os: linux
+#      dist: xenial
+#      language: php
+#      php: '7.3'
+#      services:
+#        - memcached
+#        - redis-server
+#        - mysql
+#    - os: linux
+#      dist: xenial
+#      language: php
+#      php: '7.3'
+#      env: SETUP=lowest
+#      services:
+#        - memcached
+#        - redis-server
+#        - mysql
+
+    - os: osx
+      env:
+        PHP_VERSION=7.2.20
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+          - $HOME/.composer/cache
+
 #    - os: osx
 #      language: php
 #      php: '7.2'
@@ -56,79 +61,81 @@ matrix:
 #      php: '7.3'
 #      env: SETUP=lowest
 
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.2.20
-        - PHP_DIR=php72
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
-      cache:
-        directories:
-          - /c/ProgramData/chocolatey/lib/redis-64
-          - $HOME/AppData/Local/Temp/chocolatey
-          - /c/ProgramData/ComposerSetup/bin
-          - $HOME/AppData/Local/Composer
-          - /c/ProgramData/MySQL/data
-          - /c/tools/$PHP_DIR
-          - /c/tools/mysql/
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.2.20
-        - PHP_DIR=php72
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
-        - SETUP=lowest
-      cache:
-        directories:
-          - /c/ProgramData/chocolatey/lib/redis-64
-          - $HOME/AppData/Local/Temp/chocolatey
-          - /c/ProgramData/ComposerSetup/bin
-          - $HOME/AppData/Local/Composer
-          - /c/ProgramData/MySQL/data
-          - /c/tools/$PHP_DIR
-          - /c/tools/mysql/
-
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.3.8
-        - PHP_DIR=php73
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
-      cache:
-        directories:
-          - /c/ProgramData/chocolatey/lib/redis-64
-          - $HOME/AppData/Local/Temp/chocolatey
-          - /c/ProgramData/ComposerSetup/bin
-          - $HOME/AppData/Local/Composer
-          - /c/ProgramData/MySQL/data
-          - /c/tools/$PHP_DIR
-          - /c/tools/mysql/
-    - os: windows
-      language: sh
-      env:
-        - PHP_VERSION=7.3.8
-        - PHP_DIR=php73
-        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
-        - SETUP=lowest
-      cache:
-        directories:
-          - /c/ProgramData/chocolatey/lib/redis-64
-          - $HOME/AppData/Local/Temp/chocolatey
-          - /c/ProgramData/ComposerSetup/bin
-          - $HOME/AppData/Local/Composer
-          - /c/ProgramData/MySQL/data
-          - /c/tools/$PHP_DIR
-          - /c/tools/mysql/
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.2.20
+#        - PHP_DIR=php72
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
+#      cache:
+#        directories:
+#          - /c/ProgramData/chocolatey/lib/redis-64
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - /c/ProgramData/ComposerSetup/bin
+#          - $HOME/AppData/Local/Composer
+#          - /c/ProgramData/MySQL/data
+#          - /c/tools/$PHP_DIR
+#          - /c/tools/mysql/
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.2.20
+#        - PHP_DIR=php72
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
+#        - SETUP=lowest
+#      cache:
+#        directories:
+#          - /c/ProgramData/chocolatey/lib/redis-64
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - /c/ProgramData/ComposerSetup/bin
+#          - $HOME/AppData/Local/Composer
+#          - /c/ProgramData/MySQL/data
+#          - /c/tools/$PHP_DIR
+#          - /c/tools/mysql/
+#
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.3.8
+#        - PHP_DIR=php73
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
+#      cache:
+#        directories:
+#          - /c/ProgramData/chocolatey/lib/redis-64
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - /c/ProgramData/ComposerSetup/bin
+#          - $HOME/AppData/Local/Composer
+#          - /c/ProgramData/MySQL/data
+#          - /c/tools/$PHP_DIR
+#          - /c/tools/mysql/
+#    - os: windows
+#      language: sh
+#      env:
+#        - PHP_VERSION=7.3.8
+#        - PHP_DIR=php73
+#        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
+#        - SETUP=lowest
+#      cache:
+#        directories:
+#          - /c/ProgramData/chocolatey/lib/redis-64
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - /c/ProgramData/ComposerSetup/bin
+#          - $HOME/AppData/Local/Composer
+#          - /c/ProgramData/MySQL/data
+#          - /c/tools/$PHP_DIR
+#          - /c/tools/mysql/
 
 cache:
   directories:
     - $HOME/.composer/cache
 
 before_install:
-  - if [ $TRAVIS_OS_NAME != 'windows' ]; then phpenv config-rm xdebug.ini || true; fi
-  - if [ $TRAVIS_OS_NAME != 'windows' ]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
-  - if [ $TRAVIS_OS_NAME != 'windows' ]; then printf "\n" | pecl install -f redis; fi
-  - if [ $TRAVIS_OS_NAME != 'windows' ]; then mysql -e 'CREATE DATABASE forge;'; fi
+  - if [ $TRAVIS_OS_NAME = 'linux' ]; then phpenv config-rm xdebug.ini || true; fi
+  - if [ $TRAVIS_OS_NAME = 'linux' ]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
+  - if [ $TRAVIS_OS_NAME = 'linux' ]; then printf "\n" | pecl install -f redis; fi
+  - if [ $TRAVIS_OS_NAME = 'linux' ]; then mysql -e 'CREATE DATABASE forge;'; fi
+
+  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install php@$PHP_VERSION; fi
 
   # Windows: Install PHP and setup PATH
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/$PHP_DIR/php.ini" ]; then choco install php --version $PHP_VERSION -y; ./bin/travis/windows_configure_php.sh; fi; fi
