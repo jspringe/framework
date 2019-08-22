@@ -5,71 +5,56 @@ env:
 matrix:
   fast_finish: true
   include:
-    - os: linux
-      dist: xenial
-      language: php
-      php: '7.2'
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: linux
-      dist: xenial
-      language: php
-      php: '7.2'
-      env: SETUP=lowest
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: linux
-      dist: xenial
-      language: php
-      php: '7.3'
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: linux
-      dist: xenial
-      language: php
-      php: '7.3'
-      env: SETUP=lowest
-      services:
-        - memcached
-        - redis-server
-        - mysql
+#    - os: linux
+#      dist: xenial
+#      language: php
+#      php: '7.2'
+#      services:
+#        - memcached
+#        - redis-server
+#        - mysql
+#    - os: linux
+#      dist: xenial
+#      language: php
+#      php: '7.2'
+#      env: SETUP=lowest
+#      services:
+#        - memcached
+#        - redis-server
+#        - mysql
+#    - os: linux
+#      dist: xenial
+#      language: php
+#      php: '7.3'
+#      services:
+#        - memcached
+#        - redis-server
+#        - mysql
+#    - os: linux
+#      dist: xenial
+#      language: php
+#      php: '7.3'
+#      env: SETUP=lowest
+#      services:
+#        - memcached
+#        - redis-server
+#        - mysql
 
-    - os: osx
-      language: php
-      php: '7.2'
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: osx
-      language: php
-      php: '7.2'
-      env: SETUP=lowest
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: osx
-      language: php
-      php: '7.3'
-      services:
-        - memcached
-        - redis-server
-        - mysql
-    - os: osx
-      language: php
-      php: '7.3'
-      env: SETUP=lowest
-      services:
-        - memcached
-        - redis-server
-        - mysql
+#    - os: osx
+#      language: php
+#      php: '7.2'
+#    - os: osx
+#      language: php
+#      php: '7.2'
+#      env: SETUP=lowest
+#
+#    - os: osx
+#      language: php
+#      php: '7.3'
+#    - os: osx
+#      language: php
+#      php: '7.3'
+#      env: SETUP=lowest
 
     - os: windows
       language: sh
@@ -151,7 +136,7 @@ before_install:
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
 
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/bin/mysql.exe" ]; then /c/tools/mysql/current/bin/mysqld.exe --defaults-file=/c/tools/mysql/current/my.ini; /c/tools/mysql/current/bin/mysqld.exe --install; fi; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/bin/mysql.exe" ]; then /c/tools/mysql/current/bin/mysqld.exe --defaults-file=/c/tools/mysql/current/my.ini --install; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/bin/mysql.exe" ]; then net start mysql; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/current/bin/mysql.exe" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
