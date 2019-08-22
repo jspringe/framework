@@ -5,6 +5,7 @@ env:
 matrix:
   fast_finish: true
   include:
+    # Linux Instances
 #    - os: linux
 #      dist: xenial
 #      language: php
@@ -40,8 +41,8 @@ matrix:
 #        - redis-server
 #        - mysql
 
+    # OSX Instances
     - os: osx
-      osx_image: xcode11
       language: generic
       addons:
         homebrew:
@@ -53,7 +54,6 @@ matrix:
           - $HOME/Library/Caches/Homebrew
           - $HOME/.composer/cache
     - os: osx
-      osx_image: xcode11
       language: generic
       addons:
         homebrew:
@@ -67,7 +67,6 @@ matrix:
           - $HOME/.composer/cache
 
     - os: osx
-      osx_image: xcode11
       language: generic
       addons:
         homebrew:
@@ -79,7 +78,6 @@ matrix:
           - $HOME/Library/Caches/Homebrew
           - $HOME/.composer/cache
     - os: osx
-      osx_image: xcode11
       language: generic
       addons:
         homebrew:
@@ -92,6 +90,7 @@ matrix:
           - $HOME/Library/Caches/Homebrew
           - $HOME/.composer/cache
 
+#    # Windows Instances
 #    - os: windows
 #      language: sh
 #      env:
