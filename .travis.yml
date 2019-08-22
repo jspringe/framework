@@ -64,13 +64,13 @@ matrix:
         - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.2-nts-vc15-x64.zip
       cache:
         directories:
-          - $HOME/AppData/Local/Temp/chocolatey
-          - $HOME/AppData/Local/Composer
-          - /c/tools/$PHP_DIR
-          - /c/ProgramData/ComposerSetup/bin
-          - /c/tools/mysql/
-          - /c/ProgramData/MySQL/data
           - /c/ProgramData/chocolatey/lib/redis-64
+          - $HOME/AppData/Local/Temp/chocolatey
+          - /c/ProgramData/ComposerSetup/bin
+          - $HOME/AppData/Local/Composer
+          - /c/ProgramData/MySQL/data
+          - /c/tools/$PHP_DIR
+          - /c/tools/mysql/
 #    - os: windows
 #      language: sh
 #      env:
@@ -80,13 +80,13 @@ matrix:
 #        - SETUP=lowest
 #      cache:
 #        directories:
-#          - $HOME/AppData/Local/Temp/chocolatey
-#          - $HOME/AppData/Local/Composer
-#          - /c/tools/$PHP_DIR
-#          - /c/ProgramData/ComposerSetup/bin
-#          - /c/tools/mysql/
-#          - /c/ProgramData/MySQL/data
 #          - /c/ProgramData/chocolatey/lib/redis-64
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - /c/ProgramData/ComposerSetup/bin
+#          - $HOME/AppData/Local/Composer
+#          - /c/ProgramData/MySQL/data
+#          - /c/tools/$PHP_DIR
+#          - /c/tools/mysql/
 #
 #    - os: windows
 #      language: sh
@@ -96,13 +96,13 @@ matrix:
 #        - REDIS_EXT=https://windows.php.net/downloads/pecl/releases/redis/5.0.2/php_redis-5.0.2-7.3-nts-vc15-x64.zip
 #      cache:
 #        directories:
-#          - $HOME/AppData/Local/Temp/chocolatey
-#          - $HOME/AppData/Local/Composer
-#          - /c/tools/$PHP_DIR
-#          - /c/ProgramData/ComposerSetup/bin
-#          - /c/tools/mysql/
-#          - /c/ProgramData/MySQL/data
 #          - /c/ProgramData/chocolatey/lib/redis-64
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - /c/ProgramData/ComposerSetup/bin
+#          - $HOME/AppData/Local/Composer
+#          - /c/ProgramData/MySQL/data
+#          - /c/tools/$PHP_DIR
+#          - /c/tools/mysql/
 #    - os: windows
 #      language: sh
 #      env:
@@ -112,13 +112,13 @@ matrix:
 #        - SETUP=lowest
 #      cache:
 #        directories:
-#          - $HOME/AppData/Local/Temp/chocolatey
-#          - $HOME/AppData/Local/Composer
-#          - /c/tools/$PHP_DIR
-#          - /c/ProgramData/ComposerSetup/bin
-#          - /c/tools/mysql/
-#          - /c/ProgramData/MySQL/data
 #          - /c/ProgramData/chocolatey/lib/redis-64
+#          - $HOME/AppData/Local/Temp/chocolatey
+#          - /c/ProgramData/ComposerSetup/bin
+#          - $HOME/AppData/Local/Composer
+#          - /c/ProgramData/MySQL/data
+#          - /c/tools/$PHP_DIR
+#          - /c/tools/mysql/
 
 cache:
   directories:
@@ -139,11 +139,12 @@ before_install:
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
 
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then /c/tools/mysql/current/bin/mysqld.exe --install --defaults-file=/c/tools/mysql/current/my.ini; fi; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then /c/tools/mysql/current/bin/mysqld.exe --install --defaults-file=/c/tools/mysql/current/my.ini || net start; fi; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then net start; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then net start MySQL; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/current/my.ini" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; fi
+#  - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install Redis and modify PATH
