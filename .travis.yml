@@ -157,4 +157,6 @@ install:
 
 script: vendor/bin/phpunit
 
-before_cache: mysql -u root -e 'DROP DATABASE forge;';
+before_cache:
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root -e 'DROP DATABASE forge;'; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then net stop mysql; fi
