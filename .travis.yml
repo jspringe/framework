@@ -131,49 +131,49 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew list | grep php; fi
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew uninstall --force php@7.1; fi
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then php -v; fi
-#  - if [ $TRAVIS_OS_NAME = 'osx' ]; then rm -rf /usr/local/etc/php; fi
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install php@$PHP_VERSION; fi
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then php -v; fi
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install composer; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew list | grep php; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew uninstall --force php@7.1; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then php -v; fi
+#  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then rm -rf /usr/local/etc/php; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install php@$PHP_VERSION; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then php -v; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install composer; fi
 
-  - if [ $TRAVIS_OS_NAME = 'linux' ]; then phpenv config-rm xdebug.ini || true; fi
-  - if [ $TRAVIS_OS_NAME = 'linux' ]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
-  - if [ $TRAVIS_OS_NAME = 'linux' ]; then printf "\n" | pecl install -f redis; fi
-  - if [ $TRAVIS_OS_NAME = 'linux' ]; then mysql -e 'CREATE DATABASE forge;'; fi
+  - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then phpenv config-rm xdebug.ini || true; fi
+  - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
+  - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then printf "\n" | pecl install -f redis; fi
+  - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then mysql -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install PHP and setup PATH
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/$PHP_DIR/php.ini" ]; then choco install php --version $PHP_VERSION -y; ./bin/travis/windows_configure_php.sh; fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/$PHP_DIR:$PATH; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/tools/$PHP_DIR/php.ini" ]]; then choco install php --version $PHP_VERSION -y; ./bin/travis/windows_configure_php.sh; fi; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/$PHP_DIR:$PATH; fi
 
   # Windows: Install Composer and modify PATH
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/ProgramData/ComposerSetup/bin/composer.bat" ]; then choco install composer -i;  fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/ProgramData/ComposerSetup/bin/composer.bat" ]]; then choco install composer -i;  fi; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/ComposerSetup/bin:$PATH; fi
 
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then /c/tools/mysql/current/bin/mysqld.exe --install; fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then net start MySQL; fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/current/my.ini" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ -f "/c/tools/mysql/current/my.ini" ]]; then /c/tools/mysql/current/bin/mysqld.exe --install; fi; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ -f "/c/tools/mysql/current/my.ini" ]]; then net start MySQL; fi; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/tools/mysql/current/my.ini" ]]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install Redis and modify PATH
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/ProgramData/chocolatey/lib/redis-64/redis-server.exe" ]; then choco install redis-64; fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/ProgramData/chocolatey/lib/redis-64:$PATH; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then redis-server --service-install; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then redis-server --service-start; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/ProgramData/chocolatey/lib/redis-64/redis-server.exe" ]]; then choco install redis-64; fi; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/ProgramData/chocolatey/lib/redis-64:$PATH; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-install; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-start; fi
 
   - travis_retry composer self-update
 
 install:
-  - if [ $SETUP = 'stable' ]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
-  - if [ $SETUP = 'lowest' ]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
+  - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
+  - if [[ $SETUP = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
 
 script: vendor/bin/phpunit
 
 before_cache:
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then redis-server --service-stop; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root -e 'DROP DATABASE forge;'; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then net stop mysql; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-stop; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'DROP DATABASE forge;'; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then net stop mysql; fi
