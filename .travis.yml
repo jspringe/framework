@@ -132,7 +132,7 @@ cache:
 
 before_install:
   - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install php@$PHP_VERSION; fi
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; thenbrew install composer; fi
+  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install composer; fi
 
   - if [ $TRAVIS_OS_NAME = 'linux' ]; then phpenv config-rm xdebug.ini || true; fi
   - if [ $TRAVIS_OS_NAME = 'linux' ]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
