@@ -69,6 +69,7 @@ matrix:
           - /c/tools/$PHP_DIR
           - /c/ProgramData/ComposerSetup/bin
           - /c/tools/mysql/
+          - /c/ProgramData/MySQL/data
           - /c/ProgramData/chocolatey/lib/redis-64
     - os: windows
       language: sh
@@ -84,6 +85,7 @@ matrix:
           - /c/tools/$PHP_DIR
           - /c/ProgramData/ComposerSetup/bin
           - /c/tools/mysql/
+          - /c/ProgramData/MySQL/data
           - /c/ProgramData/chocolatey/lib/redis-64
 
     - os: windows
