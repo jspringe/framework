@@ -140,7 +140,7 @@ before_install:
 
   # Windows: Install MySQL, modify PATH, ALTER root with a blank password, and CREATE database
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then /c/tools/mysql/current/bin/mysqld.exe --install --defaults-file=/c/tools/mysql/current/my.ini; fi; fi
-  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then net start mysql; fi; fi
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ -f "/c/tools/mysql/current/my.ini" ]; then net start MySQL; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then if [ ! -f "/c/tools/mysql/current/my.ini" ]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
   - if [ $TRAVIS_OS_NAME = 'windows' ]; then mysql -u root --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; fi
