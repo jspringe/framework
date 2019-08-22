@@ -138,12 +138,11 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo "memory_limit=256M" >> /usr/local/etc/php/$PHP_VERSION/php.ini; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then printf "\n" | pecl install -f memcached; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then printf "\n" | pecl install -f redis; fi
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then mysql -uroot --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; brew service restart mysql@5.7; fi
 
-  - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then mysql -e 'CREATE DATABASE forge;'; fi
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then phpenv config-rm xdebug.ini || true; fi
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then printf "\n" | pecl install -f redis; fi
+  - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then mysql -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install PHP and setup PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/tools/$PHP_DIR/php.ini" ]]; then choco install php --version $PHP_VERSION -y; ./bin/travis/windows_configure_php.sh; fi; fi
@@ -158,7 +157,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ -f "/c/tools/mysql/current/my.ini" ]]; then net start MySQL; fi; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/tools/mysql/current/my.ini" ]]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'CREATE DATABASE forge;'; fi
+  - if [[ $TRAVIS_OS_NAME != 'linux' ]]; then mysql -uroot -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install Redis and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/ProgramData/chocolatey/lib/redis-64/redis-server.exe" ]]; then choco install redis-64; fi; fi
