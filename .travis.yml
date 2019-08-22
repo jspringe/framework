@@ -131,7 +131,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install php@$PHP_VERSION; fi
+  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install php@$PHP_VERSION --force; fi
   - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install composer; fi
 
   - if [ $TRAVIS_OS_NAME = 'linux' ]; then phpenv config-rm xdebug.ini || true; fi
