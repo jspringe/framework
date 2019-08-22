@@ -135,9 +135,8 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then php -v; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo "memory_limit=256M" >> /usr/local/etc/php/$PHP_VERSION/php.ini; fi
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo "extension = memcached.so" >> /usr/local/etc/php/$PHP_VERSION/php.ini; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo "extension=memcached.so" >> /usr/local/etc/php/$PHP_VERSION/php.ini; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then pecl install -f redis; fi
 
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then mysql -e 'CREATE DATABASE forge;'; fi
