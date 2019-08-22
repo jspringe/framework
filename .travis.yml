@@ -130,8 +130,8 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then  brew list | grep php; fi
-  - if [ $TRAVIS_OS_NAME = 'osx' ]; then  brew uninstall --force php@7.1; fi
+  - if [ $TRAVIS_OS_NAME = 'osx' ]; then $(brew list | grep php); fi
+  - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew uninstall --force php@7.1; fi
   - if [ $TRAVIS_OS_NAME = 'osx' ]; then php -v; fi
 #  - if [ $TRAVIS_OS_NAME = 'osx' ]; then rm -rf /usr/local/etc/php; fi
   - if [ $TRAVIS_OS_NAME = 'osx' ]; then brew install php@$PHP_VERSION; fi
