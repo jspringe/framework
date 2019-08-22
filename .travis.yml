@@ -138,6 +138,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo "memory_limit=256M" >> /usr/local/etc/php/$PHP_VERSION/php.ini; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then printf "\n" | pecl install -f memcached; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then printf "\n" | pecl install -f redis; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then mysql -uroot --skip-password -e "SET PASSWORD FOR root@localhost = PASSWORD('');"; brew service restart mysql@5.7; fi
 
   - if [[ $TRAVIS_OS_NAME != 'windows' ]]; then mysql -e 'CREATE DATABASE forge;'; fi
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then phpenv config-rm xdebug.ini || true; fi
