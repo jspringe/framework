@@ -1,3 +1,4 @@
-brew "php@$PHP_VERSION", link: true, force: true
+brew "php@7.2", link: true, force: true
 brew "mysql@5.7", restart_service: true, link: true, conflicts_with: ["mysql"]
+brew "redis", restart_service: true
 brew "composer"

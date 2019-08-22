@@ -45,7 +45,7 @@ matrix:
       language: generic
       addons:
         homebrew:
-          brewfile: ./bin/travis/mac_brewfile.txt
+          brewfile: ./bin/travis/mac_brewfile_72.txt
       env:
         PHP_VERSION=7.2
       cache:
@@ -145,7 +145,7 @@ before_install:
 #  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install php@$PHP_VERSION; fi
 #  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew link php@$PHP_VERSION --force; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then php -v; fi
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then phpenv ||; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo "memory_limit=256M" >> /usr/local/etc/php/$PHP_VERSION/php.ini; fi
 #  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install composer; fi
 
   - if [[ $TRAVIS_OS_NAME = 'linux' ]]; then phpenv config-rm xdebug.ini || true; fi
