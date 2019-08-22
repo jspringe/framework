@@ -134,7 +134,6 @@ cache:
 before_install:
 # /usr/local/etc/php/7.2/ - ini file
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew update; fi
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew tap homebrew/homebrew-php; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew install php@$PHP_VERSION; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then brew link php@$PHP_VERSION; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then php -v; fi
