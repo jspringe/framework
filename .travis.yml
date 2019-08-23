@@ -113,7 +113,7 @@ cache:
     - vendor
 #    - $HOME/.composer/cache
 #    - $HOME/AppData/Local/Composer
-    - $HOME/Library/Caches/Homebrew
+    - $HOME/Library/Caches/Homebrew/downloads
     - $HOME/AppData/Local/Temp/chocolatey
     - /c/ProgramData/chocolatey/lib/redis-64
     - /c/ProgramData/ComposerSetup/bin
@@ -153,8 +153,6 @@ before_install:
 
   - if [[ $TRAVIS_OS_NAME != 'linux' ]]; then mysql -uroot -e 'CREATE DATABASE forge;'; fi
   - travis_retry composer self-update
-  # Completely optional - just trying to speed up the slower VMs.
-  - travis_retry composer global require hirak/prestissimo
 
 install:
   - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
