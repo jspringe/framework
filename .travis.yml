@@ -110,8 +110,9 @@ matrix:
 
 cache:
   directories:
-    - $HOME/.composer/cache
-    - $HOME/AppData/Local/Composer
+    - vendor
+#    - $HOME/.composer/cache
+#    - $HOME/AppData/Local/Composer
     - $HOME/Library/Caches/Homebrew
     - $HOME/AppData/Local/Temp/chocolatey
     - /c/ProgramData/chocolatey/lib/redis-64
@@ -150,7 +151,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-install; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-start; fi
 
-  - if [[ $TRAVIS_OS_NAME != 'linux' ]]; then mysql -e mysql -uroot -e 'CREATE DATABASE forge;'; fi
+  - if [[ $TRAVIS_OS_NAME != 'linux' ]]; then mysql -uroot -e 'CREATE DATABASE forge;'; fi
   - travis_retry composer self-update
   # Completely optional - just trying to speed up the slower VMs.
   - travis_retry composer global require hirak/prestissimo
