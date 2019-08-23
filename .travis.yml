@@ -111,8 +111,6 @@ matrix:
 cache:
   directories:
     - vendor
-#    - $HOME/.composer/cache
-#    - $HOME/AppData/Local/Composer
     - $HOME/Library/Caches/Homebrew/downloads
     - $HOME/AppData/Local/Temp/chocolatey
     - /c/ProgramData/chocolatey/lib/redis-64
