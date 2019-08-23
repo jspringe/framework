@@ -111,14 +111,14 @@ matrix:
 cache:
   directories:
     - $HOME/.composer/cache
-    - $HOME/Library/Caches/Homebrew
-    - /c/ProgramData/chocolatey/lib/redis-64
-    - $HOME/AppData/Local/Temp/chocolatey
-    - /c/ProgramData/ComposerSetup/bin
     - $HOME/AppData/Local/Composer
+    - $HOME/Library/Caches/Homebrew
+    - $HOME/AppData/Local/Temp/chocolatey
+    - /c/ProgramData/chocolatey/lib/redis-64
+    - /c/ProgramData/ComposerSetup/bin
     - /c/ProgramData/MySQL/data
     - /c/tools/$PHP_DIR
-    - /c/tools/mysql/
+    - /c/tools/mysql
 
 before_install:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo "memory_limit=256M" >> /usr/local/etc/php/$PHP_VERSION/php.ini; fi
@@ -143,7 +143,6 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ -f "/c/tools/mysql/current/my.ini" ]]; then net start MySQL; fi; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/tools/mysql/current/my.ini" ]]; then choco install mysql --version 5.7.18; ./bin/travis/windows_configure_mysql.sh; fi; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then export PATH=/c/tools/mysql/current/bin:$PATH; fi
-  - if [[ $TRAVIS_OS_NAME != 'linux' ]]; then mysql -uroot -e 'CREATE DATABASE forge;'; fi
 
   # Windows: Install Redis and modify PATH
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then if [[ ! -f "/c/ProgramData/chocolatey/lib/redis-64/redis-server.exe" ]]; then choco install redis-64; fi; fi
@@ -151,7 +150,10 @@ before_install:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-install; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-start; fi
 
+  - mysql -uroot -e 'CREATE DATABASE forge;'; fi
   - travis_retry composer self-update
+  # Completely optional - just trying to speed up the slower VMs.
+  - travis_retry composer global require hirak/prestissimo
 
 install:
   - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
@@ -161,5 +163,5 @@ script: vendor/bin/phpunit
 
 before_cache:
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then redis-server --service-stop; fi
-  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -u root -e 'DROP DATABASE forge;'; fi
+  - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then mysql -uroot -e 'DROP DATABASE forge;'; fi
   - if [[ $TRAVIS_OS_NAME = 'windows' ]]; then net stop mysql; fi
